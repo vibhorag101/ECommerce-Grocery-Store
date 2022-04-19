@@ -1,0 +1,4 @@
+mysql_host : 'localhost'
+mysql_user: 'root'
+mysql_password : '9317'
+mysql_db : 'online_store'
