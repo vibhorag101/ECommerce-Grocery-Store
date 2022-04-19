@@ -51,9 +51,10 @@ def sellerRegister():
         POO = sellerDetails['Place_Of_Operation']
         cur = my_sql.connection.cursor()
         rand_admin = cur.execute("SELECT Admin_ID FROM admin")
-        print("Printing data type here" + str(type(rand_admin)))
-        F_key = random.choice(rand_admin)
-        cur.execute("INSERT INTO seller(First_Name,Last_Name,Email,Phone_Number,Password,Place_Of_Operation,Admin_ID) VALUES(%s, %s, %s,%s,%s,%s, %d)",(First_Name,Last_Name,Email,Mobile_No,Password,POO, F_key))
+        if rand_admin >0:
+            rand_ad = cur.fetchall()
+            F_key = random.choice(rand_ad)
+            cur.execute("INSERT INTO seller(First_Name,Last_Name,Email,Phone_Number,Password,Place_Of_Operation,Admin_ID) VALUES(%s, %s, %s,%s,%s,%s, %s)",(First_Name,Last_Name,Email,Mobile_No,Password,POO, F_key))
         my_sql.connection.commit()
         cur.close()
     return render_template('sellerRegister.html')
