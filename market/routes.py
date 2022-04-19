@@ -20,7 +20,7 @@ def customerRegister():
         Mobile_No = custDetails['Mobile_No']
         Password = custDetails['Password']
         cur = my_sql.connection.cursor()
-        cur.execute("INSERT INTO customer(First_Name,Last_Name,Email,Mobile_No,Password) VALUES(%s %s %s %s %s)",(First_Name,Last_Name,Email,Mobile_No,Password))
+        cur.execute("INSERT INTO customer(First_Name,Last_Name,Email,Mobile_No,Password) VALUES(%s, %s, %s, %s, %s)",(First_Name,Last_Name,Email,Mobile_No,Password))
         my_sql.connection.commit()
         cur.close()
     return render_template('customerRegister.html')
