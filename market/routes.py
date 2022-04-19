@@ -24,3 +24,16 @@ def customerRegister():
         my_sql.connection.commit()
         cur.close()
     return render_template('customerRegister.html')
+
+@app.route('/adminRegister',methods=['GET','POST'])
+def adminRegister():
+    if request.method=='POST':
+        custDetails = request.form
+        First_Name = custDetails['First_Name']
+        Last_Name = custDetails['Last_Name']
+        Password = custDetails['Password']
+        cur = my_sql.connection.cursor()
+        cur.execute("INSERT INTO admin(First_Name,Last_Name,Admin_Password) VALUES(%s, %s, %s)",(First_Name,Last_Name,Password))
+        my_sql.connection.commit()
+        cur.close()
+    return render_template('adminRegister.html')
