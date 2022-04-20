@@ -8,7 +8,6 @@ import random
 
 @app.route('/home/<user_id>')
 def home(user_id):
-    print(user_id)
     dict= {
         "Name": "iPhone X",
         "Price": "800",
