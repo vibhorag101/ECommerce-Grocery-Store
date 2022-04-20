@@ -11,17 +11,20 @@ def home():
     dict= {
         "Name": "iPhone X",
         "Price": "800",
-        "Brand": "Apple"
+        "Brand": "Apple",
+        # "img" : "./static/photo1.jpeg"
     }
     dict1= {
         "Name": "iPhone 11",
         "Price": "700",
-        "Brand": "Samsung"
+        "Brand": "Samsung",
+        # "img" : "./static/photo2.jpeg"
     }
     dict2= {
         "Name": "iPhone 14",
         "Price": "1800",
-        "Brand": "Apple"
+        "Brand": "Apple",
+        # "img" : "./static/photo3.jpeg"
     }
     list =[]
     list.append(dict)
