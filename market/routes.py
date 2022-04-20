@@ -1,13 +1,14 @@
-from flask import render_template, request
+from http.client import HTTPResponse
+from flask import redirect, render_template, request
 from pyparsing import nums
 from market import my_sql
 from market import app
 import random
 
 
-@app.route('/home')
-@app.route('/')
-def home():
+@app.route('/home/<user_id>')
+def home(user_id):
+    print(user_id)
     dict= {
         "Name": "iPhone X",
         "Price": "800",
@@ -46,6 +47,10 @@ def home():
     list.append(dict3)
     list.append(dict4)
     return render_template('home.html',list=list)
+
+@app.route('/')
+def temp():
+    return 'HELLO'
 
 
 @app.route('/customerRegister',methods=['GET','POST'])
@@ -95,3 +100,32 @@ def sellerRegister():
         my_sql.connection.commit()
         cur.close()
     return render_template('sellerRegister.html')
+
+# @app.route('/user-purchase',methods=['GET','POST'])
+# def userPurchase():
+#     u_list = []
+#     temp_dict = {}
+#     if request.method=='POST':
+#         prod_details = request.form
+        
+@app.route('/UserLogin',methods=['GET','POST'])
+def UserLogin():
+    if request.method=='POST':
+        userDetail = request.form
+        Email = userDetail['Email']
+        Password = userDetail['Password']
+        cur = my_sql.connection.cursor()
+        cust_list = cur.execute("SELECT * FROM customer")
+        if cust_list>0:
+            cust_all = cur.fetchall()
+            c_tup = ()
+            for tup in cust_all:
+                if(tup[3]==Email):
+                    c_tup = tup
+                    break
+            if c_tup==() or Password!=c_tup[5]:
+                return render_template('IncorrectLogin.html',userDetails=c_tup)
+            else:
+                url_direct = '/home'+'/'+str(c_tup[0])
+                return redirect(url_direct)
+    return render_template('UserLogin.html')
