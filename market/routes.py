@@ -8,44 +8,23 @@ import random
 
 @app.route('/home/<user_id>')
 def home(user_id):
-    dict= {
-        "Name": "iPhone X",
-        "Price": "800",
-        "Brand": "Apple",
-        # "img" : "./static/photo1.jpeg"
-    }
-    dict1= {
-        "Name": "iPhone 11",
-        "Price": "700",
-        "Brand": "Samsung",
-        # "img" : "./static/photo2.jpeg"
-    }
-    dict2= {
-        "Name": "iPhone 14",
-        "Price": "1800",
-        "Brand": "Apple",
-        # "img" : "./static/photo3.jpeg"
-    }
-    dict3= {
-        "Name": "iPhone X12",
-        "Price": "8009",
-        "Brand": "Apple",
-        # "img" : "./static/photo1.jpeg"
-    }
-    dict4= {
-        "Name": "iPhone X21",
-        "Price": "80032",
-        "Brand": "Apple",
-        # "img" : "./static/photo1.jpeg"
-    }
-    
-    list =[]
-    list.append(dict)
-    list.append(dict1)
-    list.append(dict2)
-    list.append(dict3)
-    list.append(dict4)
-    return render_template('home.html',list=list)
+    my_list =[]
+    cur = my_sql.connection.cursor()
+    product_list = cur.execute("SELECT * FROM product")
+    if product_list>0:
+        product_all = cur.fetchall()
+        for prod in product_all:
+            temp_dict = {}
+            for index in range(1,4):
+                if(index==1):
+                    temp_dict['Name']=prod[1]
+                elif(index==2):
+                    temp_dict['Price']=prod[2]
+                else:
+                    temp_dict['Brand']=prod[3]
+            my_list.append(temp_dict)
+
+    return render_template('home.html',list=my_list)
 
 @app.route('/')
 def temp():
