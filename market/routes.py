@@ -8,7 +8,26 @@ import random
 @app.route('/home')
 @app.route('/')
 def home():
-    return render_template('home.html')
+    dict= {
+        "Name": "iPhone X",
+        "Price": "800",
+        "Brand": "Apple"
+    }
+    dict1= {
+        "Name": "iPhone 11",
+        "Price": "700",
+        "Brand": "Samsung"
+    }
+    dict2= {
+        "Name": "iPhone 14",
+        "Price": "1800",
+        "Brand": "Apple"
+    }
+    list =[]
+    list.append(dict)
+    list.append(dict1)
+    list.append(dict2)
+    return render_template('home.html',list=list)
 
 
 @app.route('/customerRegister',methods=['GET','POST'])

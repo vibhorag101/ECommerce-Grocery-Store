@@ -3,108 +3,20 @@
 %} {% block content %}
 <div class="container-fuild">
   <div class="row" style="margin-left: 20px;">
+
+    {% for dict in list%}
     <div class="col-2.4">
       <div class="card" style="width: 18rem; margin: 5px;">
         <img class="card-img-top" src="..." alt="Card image cap" />
         <div class="card-body">
-          <h5 class="card-title text-dark">Product</h5>
-          <p class="card-text text-dark">Good Product</p>
+          <h5 class="card-title text-primary">{{dict.Name}}</h5>
+          <h5 class="card-title text-success">{{dict.Brand}}</h5>
+          <h5 class="card-title text-warning">{{dict.Price}}</h5>
           <a href="#" class="btn btn-primary">Add to Cart</a>
         </div>
       </div>
     </div>
-
-    <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-2.4">
-        <div class="card" style="width: 18rem; margin: 5px;">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title text-dark">Product</h5>
-            <p class="card-text text-dark">Good Product</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
-      </div>
+    {% endfor %}
   </div>
   {% endblock %}
 </div>
