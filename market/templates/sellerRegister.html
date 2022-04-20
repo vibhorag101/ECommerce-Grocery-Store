@@ -4,8 +4,12 @@
 {% endblock %}
 
 {% block content %}
-<div>
+<div class ="d-flex justify-content-center align-items-center min-vh-100" >
+<div style="max-width: 30%;">
 <form method ="POST" action="">
+  <h1 class="text-center">
+    Enter your Details
+  </h1>
     <div class="form-row">
         <div class="col">
           <input type="text" class="form-control" placeholder="First name" name="First_Name">
@@ -15,26 +19,29 @@
         </div>
     </div>
     
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
+    <div class="form-group" style="padding-top: 10px;">
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
       name = "Email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="examplee@123" name="Password">
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Password">
+      <small id="passwordHelpBlock" class="form-text text-muted">
+        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+      </small>
     </div>
     <div class="form-group">
-      <label for="formGroupExampleInput">Mobile Number</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="1234567891" name="Phone_Number">
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Mobile Number" name="Phone_Number">
+      <small id="emailHelp" class="form-text text-muted">Must be a 10 Digit Number</small>
     </div>
     <div class="form-group">
-        <label for="formGroupExampleInput">Place of Operation</label>
         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="City Name" name="Place_Of_Operation">
       </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
   </form>
+</div>
 </div>
 
 
