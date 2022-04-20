@@ -26,10 +26,25 @@ def home():
         "Brand": "Apple",
         # "img" : "./static/photo3.jpeg"
     }
+    dict3= {
+        "Name": "iPhone X12",
+        "Price": "8009",
+        "Brand": "Apple",
+        # "img" : "./static/photo1.jpeg"
+    }
+    dict4= {
+        "Name": "iPhone X21",
+        "Price": "80032",
+        "Brand": "Apple",
+        # "img" : "./static/photo1.jpeg"
+    }
+    
     list =[]
     list.append(dict)
     list.append(dict1)
     list.append(dict2)
+    list.append(dict3)
+    list.append(dict4)
     return render_template('home.html',list=list)
 
 
