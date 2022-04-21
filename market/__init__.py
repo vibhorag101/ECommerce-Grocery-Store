@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.secret_key = "this@is@my@secret"
 
 # Configure database
 db = yaml.load (open('database.yaml'))

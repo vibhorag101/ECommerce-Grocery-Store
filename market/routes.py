@@ -1,5 +1,5 @@
 from http.client import HTTPResponse
-from flask import redirect, render_template, request
+from flask import flash, redirect, render_template, request
 from pyparsing import nums
 from market import my_sql
 from market import app
@@ -102,7 +102,8 @@ def UserLogin():
                     c_tup = tup
                     break
             if c_tup==() or Password!=c_tup[5]:
-                return render_template('IncorrectLogin.html',userDetails=c_tup)
+                flash('Invalid Email or Password')
+                # return render_template('IncorrectLogin.html',userDetails=c_tup)
             else:
                 url_direct = '/home'+'/'+str(c_tup[0])
                 return redirect(url_direct)
