@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from xml.dom.expatbuilder import FragmentBuilder
 from flask import flash, redirect, render_template, request
 from pyparsing import nums
 from market import my_sql
@@ -6,10 +7,17 @@ from market import app
 import random
 
 
+## Change this function as for it to work according to product page add relevent html content...like getting brand,name,price as 
+## get request from form and the POST request will be when user will freeze his order and will go to orders page
+
 @app.route('/home/<user_id>')
 def home(user_id):
     my_list =[]
+    cart_id = StaticClass.giveCartId() 
+    total_val=0
+    total_count=0
     cur = my_sql.connection.cursor()
+    cust_cart_list=[]
     product_list = cur.execute("SELECT * FROM product")
     if product_list>0:
         product_all = cur.fetchall()
@@ -23,6 +31,25 @@ def home(user_id):
                 else:
                     temp_dict['Brand']=prod[3]
             my_list.append(temp_dict)
+    if request.method=='POST':
+        cur = my_sql.connection.cursor()
+        cur.execute("INSERT INTO cart(Cart_ID,Total_Value,Total_Count) VALUES(%s, %s, %s)",(cart_id,total_val,total_count))
+        my_sql.connection.commit()
+        cur.close() 
+        url_direct = '/order'+str(user_id)  
+        return redirect(url_direct)
+    else:
+        purchaseDetails = request.form
+        Name = purchaseDetails['Name']
+        Brand = purchaseDetails['Brand']
+        Price = purchaseDetails['Price']
+        total_count+=1
+        total_val+=int(Price)
+        temp_dict = {}
+        temp_dict['Name']=Name
+        temp_dict['Brand']=Brand 
+        temp_dict['Price']=Price
+        cust_cart_list.append(temp_dict)
 
     return render_template('home.html',list=my_list)
 
@@ -108,3 +135,63 @@ def UserLogin():
                 url_direct = '/home'+'/'+str(c_tup[0])
                 return redirect(url_direct)
     return render_template('UserLogin.html')
+
+## Edited from here on... Please make the relevent changes in front end
+
+## For this function I made admin enter only f_name, l_name and password and not email as we don't have that in our database
+@app.route('/AdminLogin',methods=['GET','POST'])
+def AdminLogin():
+    if request.method=='POST':
+        userDetail = request.form
+        First_Name = userDetail['First_Name']
+        Last_Name = userDetail['Last_Name']
+        Password = userDetail['Password']
+        cur = my_sql.connection.cursor()
+        cust_list = cur.execute("SELECT * FROM admin")
+        if cust_list>0:
+            cust_all = cur.fetchall()
+            c_tup = ()
+            for tup in cust_all:
+                if(tup[1]==First_Name and tup[2]==Last_Name):
+                    c_tup = tup
+                    break
+            if c_tup==() or Password!=c_tup[3]:
+                flash('Invalid Email or Password')
+                # return render_template('IncorrectLogin.html',userDetails=c_tup)
+            else:
+                url_direct = '/home'+'/'+str(c_tup[0])
+                return redirect(url_direct)
+    return render_template('AdminLogin.html')
+
+## This is exactly similar as User login
+@app.route('/SellerLogin',methods=['GET','POST'])
+def UserLogin():
+    if request.method=='POST':
+        userDetail = request.form
+        Email = userDetail['Email']
+        Password = userDetail['Password']
+        cur = my_sql.connection.cursor()
+        cust_list = cur.execute("SELECT * FROM seller")
+        if cust_list>0:
+            cust_all = cur.fetchall()
+            c_tup = ()
+            for tup in cust_all:
+                if(tup[3]==Email):
+                    c_tup = tup
+                    break
+            if c_tup==() or Password!=c_tup[5]:
+                flash('Invalid Email or Password')
+                # return render_template('IncorrectLogin.html',userDetails=c_tup)
+            else:
+                url_direct = '/home'+'/'+str(c_tup[0])
+                return redirect(url_direct)
+    return render_template('SellerLogin.html')
+
+class StaticClass:
+    
+    cart_id = 500
+
+    @staticmethod
+    def giveCartId():
+        cart_id +=1
+        return cart_id 
