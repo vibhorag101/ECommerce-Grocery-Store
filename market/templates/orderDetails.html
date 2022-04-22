@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+  Register Customer
+{% endblock %}
+
+{% block content %}
+<div class ="d-flex justify-content-center align-items-center min-vh-100" >
+<div style="max-width: 30%;">
+<form method ="POST" action="">
+  <h1 class="text-center">
+    Enter your Details
+  </h1>
+    <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="House Number" name="HNO">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="City" name="City">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="State" name="State">
+          </div>
+
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Pincode" name="Pincode">
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Payment Mode" name="Mode">
+      </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Amount" name="Amount">
+    </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary">Place Order</button>
+  </div>
+  </form>
+</div>
+</div>
+
+
+
+
+
+
+{% endblock %}
