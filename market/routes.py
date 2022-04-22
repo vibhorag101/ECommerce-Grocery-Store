@@ -93,10 +93,10 @@ def placeOrder(user_id):
             my_sql.connection.commit()
             cur.close()
         return redirect('/placeOrder'+'/'+str(user_id))
-    elif request.method=='GET':
+    else:
         url_direct = '/home'+'/'+str(user_id)
-        return redirect(url_direct)
-    return render_template('order.html',list=customer_cart_list)
+        redirect(url_direct)
+    return render_template('order.html',list=customer_cart_list,user_id=user_id)
 
 @app.route('/')
 def temp():
