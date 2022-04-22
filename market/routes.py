@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from socket import RDS_RDMA_DONTWAIT
 from xml.dom.expatbuilder import FragmentBuilder
 from flask import flash, redirect, render_template, request
 from pyparsing import nums
@@ -43,10 +44,10 @@ def userEnter(user_id):
                 else:
                     temp_dict['Brand']=prod[3]
             my_list.append(temp_dict)
-    home(user_id,my_list)
+    home(user_id)
     return render_template('home.html',list=my_list)
 
-def home(user_id,my_list):
+def home(user_id):
     global cart_id
     global total_count
     global total_val
@@ -58,7 +59,7 @@ def home(user_id,my_list):
         my_sql.connection.commit()
         cur.close() 
         url_direct = '/order'+str(user_id)  
-        return redirect(url_direct)
+        return redirect(url_direct,list=customer_cart_list)
     else:
         purchaseDetails = request.args
         try:
@@ -72,16 +73,41 @@ def home(user_id,my_list):
             temp_dict['Brand']=Brand 
             temp_dict['Price']=Price
             customer_cart_list.append(temp_dict)
-            print(customer_cart_list)
-            print(cart_id)
         except KeyError:
             tempError = "Error: KeyError"
 
+@app.route('/order/<user_id>',methods=['GET','POST'])
+def placeOrder(user_id):
+    global customer_cart_list
+    global cart_id
+    if request.method=='POST':
+        for item in customer_cart_list:
+            product_name = item[0]
+            cur = my_sql.connection.cursor()
+            prod_list = cur.execute("SELECT * FROM product")
+            if prod_list>0:
+                prod_all = cur.fetchall()
+                id = -1
+            for tup in prod_all:
+                if(tup[1]==product_name):
+                    id = tup[0]
+                    break
+            cur.execute("INSERT INTO associated_with(Customer_ID,Cart_ID,Product_ID) VALUES(%s, %s, %s)",(user_id,cart_id,id))
+            my_sql.connection.commit()
+            cur.close()
+        redirect('/placeOrder'+str(user_id))
+    else:
+        url_direct = '/home'+'/'+str(user_id)
+        redirect(url_direct)
+    return render_template('order.html',customer_cart_list)
 
 @app.route('/')
 def temp():
     return 'HELLO'
 
+@app.route('/placeOrder/<user_id>')
+def order_placing(user_id):
+    return 'Hello from placing'
 
 @app.route('/customerRegister',methods=['GET','POST'])
 def customerRegister():
