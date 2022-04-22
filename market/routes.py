@@ -79,7 +79,7 @@ def placeOrder(user_id):
     global cart_id
     if request.method=='POST':
         for item in customer_cart_list:
-            product_name = item[0]
+            product_name = item['Name']
             cur = my_sql.connection.cursor()
             prod_list = cur.execute("SELECT * FROM product")
             if prod_list>0:
@@ -92,10 +92,10 @@ def placeOrder(user_id):
             cur.execute("INSERT INTO associated_with(Customer_ID,Cart_ID,Product_ID) VALUES(%s, %s, %s)",(user_id,cart_id,id))
             my_sql.connection.commit()
             cur.close()
-        redirect('/placeOrder'+'/'+str(user_id))
-    else:
+        return redirect('/placeOrder'+'/'+str(user_id))
+    elif request.method=='GET':
         url_direct = '/home'+'/'+str(user_id)
-        redirect(url_direct)
+        return redirect(url_direct)
     return render_template('order.html',list=customer_cart_list)
 
 @app.route('/')
@@ -238,7 +238,7 @@ def SellerLogin():
 
 class StaticClass:
     
-    cart_id = 500
+    cart_id = random.randint(1000,100000)
 
     @staticmethod
     def giveCartId():
