@@ -5,7 +5,7 @@
       <div class="row" style="margin-left: 20px;">
         <!-- {% set userID = userID %} -->
         {% for dict in list%}
-        <div class="col-6">
+        <div class="col-3">
           <div class="card" style="width: 15rem;margin: 5px;">
             <img class="card-img-top" src="https://picsum.photos/100" alt="Card image cap"/>
             <div class="card-body">
@@ -24,13 +24,11 @@
       {% block navBar %}
       <div style="margin: 5px;">
         <form class="form-inline my-2 my-lg-0" method="POST">
+            <input class="form-control mr-sm-2" type="search" placeholder="Coupon_Code" name = "Promo_Code">
             <button class="btn btn-danger my-2 my-sm-0 text-light " type="submit">Place Order</button>
         </form>
       </div>
       <!-- <a class="btn btn-outline-success my-2 my-sm-0 text-light bg-dark" href="/home/{{user_id}}">Go Back</a> -->
-      <!-- <form class="form-inline my-2 my-lg-0" action="/home/{{user_id}}">
-        <button class="btn btn-outline-success my-2 my-sm-0 text-light bg-dark" type="submit">Go Back</button>
-      </form> -->
 
       {% endblock %}
       
