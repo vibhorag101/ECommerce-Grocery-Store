@@ -3,16 +3,22 @@
 %} {% block content %}
 <div class="container-fuild">
   <div class="row" style="margin-left: 20px;">
-
+    <!-- {% set userID = userID %} -->
     {% for dict in list%}
     <div class="col-2.4">
-      <div class="card" style="width: 18rem;margin: 5px;">
+      <div class="card" style="width: 15rem;margin: 5px;">
         <img class="card-img-top" src="https://picsum.photos/100" alt="Card image cap"/>
         <div class="card-body">
           <h5 class="card-title text-primary">Name: {{dict.Name}}</h5>
           <h5 class="card-title text-success">Brand: {{dict.Brand}}</h5>
           <h5 class="card-title text-danger">Price: RS {{dict.Price}}</h5>
-          <a href="#" class="btn btn-primary">Add to Cart</a>
+          <form action="" method="GET">
+            <input type="hidden" name="Name" value="{{dict.Name}}">
+            <input type="hidden" name="Brand" value="{{dict.Brand}}">
+            <input type="hidden" name="Price" value="{{dict.Price}}">
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+          <!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
         </div>
       </div>
     </div>

@@ -39,17 +39,23 @@ def home(user_id):
         url_direct = '/order'+str(user_id)  
         return redirect(url_direct)
     else:
-        purchaseDetails = request.form
-        Name = purchaseDetails['Name']
-        Brand = purchaseDetails['Brand']
-        Price = purchaseDetails['Price']
-        total_count+=1
-        total_val+=int(Price)
-        temp_dict = {}
-        temp_dict['Name']=Name
-        temp_dict['Brand']=Brand 
-        temp_dict['Price']=Price
-        cust_cart_list.append(temp_dict)
+        purchaseDetails = request.args
+        try:
+            Name = purchaseDetails['Name']
+            Brand = purchaseDetails['Brand']
+            Price = purchaseDetails['Price']
+            total_count+=1
+            total_val+=int(Price)
+            temp_dict = {}
+            temp_dict['Name']=Name
+            temp_dict['Brand']=Brand 
+            temp_dict['Price']=Price
+            cust_cart_list.append(temp_dict)
+            print(cust_cart_list)
+            print(cart_id)
+        except KeyError:
+            tempError = "Error: KeyError"
+
 
     return render_template('home.html',list=my_list)
 
@@ -165,7 +171,7 @@ def AdminLogin():
 
 ## This is exactly similar as User login
 @app.route('/SellerLogin',methods=['GET','POST'])
-def UserLogin():
+def SellerLogin():
     if request.method=='POST':
         userDetail = request.form
         Email = userDetail['Email']
@@ -193,5 +199,5 @@ class StaticClass:
 
     @staticmethod
     def giveCartId():
-        cart_id +=1
-        return cart_id 
+        StaticClass.cart_id +=1
+        return StaticClass.cart_id
