@@ -10,14 +10,26 @@ import random
 ## Change this function as for it to work according to product page add relevent html content...like getting brand,name,price as 
 ## get request from form and the POST request will be when user will freeze his order and will go to orders page
 
-@app.route('/home/<user_id>')
-def home(user_id):
-    my_list =[]
-    cart_id = StaticClass.giveCartId() 
+
+cart_id=0
+total_val=0
+total_count=0
+customer_cart_list=[]
+
+def reinitialize():
+    global cart_id
+    global total_count
+    global total_val
+    global customer_cart_list
+    cart_id = StaticClass.giveCartId()
     total_val=0
     total_count=0
+    customer_cart_list=[]
+
+@app.route('/home/<user_id>')
+def userEnter(user_id):
+    my_list =[]
     cur = my_sql.connection.cursor()
-    cust_cart_list=[]
     product_list = cur.execute("SELECT * FROM product")
     if product_list>0:
         product_all = cur.fetchall()
@@ -31,6 +43,16 @@ def home(user_id):
                 else:
                     temp_dict['Brand']=prod[3]
             my_list.append(temp_dict)
+    reinitialize()
+    home(user_id,my_list)
+    return render_template('home.html',list=my_list)
+
+def home(user_id,my_list):
+    global cart_id
+    global total_count
+    global total_val
+    global customer_cart_list
+    cur = my_sql.connection.cursor()
     if request.method=='POST':
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO cart(Cart_ID,Total_Value,Total_Count) VALUES(%s, %s, %s)",(cart_id,total_val,total_count))
@@ -44,20 +66,19 @@ def home(user_id):
             Name = purchaseDetails['Name']
             Brand = purchaseDetails['Brand']
             Price = purchaseDetails['Price']
-            total_count+=1
-            total_val+=int(Price)
+            total_count=total_count+1
+            total_val=total_val+int(Price)
             temp_dict = {}
             temp_dict['Name']=Name
             temp_dict['Brand']=Brand 
             temp_dict['Price']=Price
-            cust_cart_list.append(temp_dict)
-            print(cust_cart_list)
+            customer_cart_list.append(temp_dict)
+            print(customer_cart_list)
             print(cart_id)
         except KeyError:
             tempError = "Error: KeyError"
-
-
     return render_template('home.html',list=my_list)
+
 
 @app.route('/')
 def temp():
