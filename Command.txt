@@ -1,0 +1,9 @@
+For Creating a dump file in the current folder
+---> mysqldump -u root -p database_name > Dumpfile_Name.sql (or Dump_File Name)
+---> mysqldump -u root -p online_store > Dump.sql
+
+For restoring the dump file in the current folder with Dump file
+---> mysql -u root -p database_name < Dumpfile_Name.sql
+---> mysql -u root -p online_store < Dump.sql
+
+Works only with CMD
