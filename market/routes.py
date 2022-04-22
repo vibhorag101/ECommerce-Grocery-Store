@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 from xml.dom.expatbuilder import FragmentBuilder
-from flask import flash, redirect, render_template, request
+from flask import flash, redirect, render_template, request, url_for
 from pyparsing import nums
 from market import my_sql
 from market import app
@@ -26,9 +26,13 @@ def reinitialize():
     total_count=0
     customer_cart_list=[]
 
-@app.route('/home/<user_id>')
+@app.route('/home/<user_id>', methods=['GET', 'POST'])
 def userEnter(user_id):
     my_list =[]
+    global cart_id
+    global total_count
+    global total_val
+    global customer_cart_list
     cur = my_sql.connection.cursor()
     product_list = cur.execute("SELECT * FROM product")
     if product_list>0:
@@ -43,26 +47,14 @@ def userEnter(user_id):
                 else:
                     temp_dict['Brand']=prod[3]
             my_list.append(temp_dict)
-    home(user_id)
-    return render_template('home.html',list=my_list)
-
-def home(user_id):
-    global cart_id
-    global total_count
-    global total_val
-    global customer_cart_list
-    cur = my_sql.connection.cursor()
-    print("we arrived before post")
     if request.method=='POST':
-        print("we are at 1")
         cur = my_sql.connection.cursor()
-        cur.execute("INSERT INTO cart(Cart_ID,Total_Value,Total_Count) VALUES(%s, %s, %s)",(cart_id,total_val,total_count))
-        print("we are at 2")
+        OID = 3
+        f_amt = total_val
+        cur.execute("INSERT INTO cart(Cart_ID,Total_Value,Total_Count,Offer_ID,Final_Amount) VALUES(%s, %s, %s, %s, %s)",(cart_id,total_val,total_count,OID,f_amt))
         my_sql.connection.commit()
-        cur.close() 
+        cur.close()
         url_direct = '/order'+'/'+str(user_id)
-        print(url_direct)
-        print('Coming here')  
         return redirect(url_direct)
     else:
         purchaseDetails = request.args
@@ -79,10 +71,10 @@ def home(user_id):
             customer_cart_list.append(temp_dict)
         except KeyError:
             tempError = "Error: KeyError"
+    return render_template('home.html',list=my_list)
 
 @app.route('/order/<user_id>',methods=['GET','POST'])
 def placeOrder(user_id):
-    print('came suscessfully here')
     global customer_cart_list
     global cart_id
     if request.method=='POST':
