@@ -77,7 +77,40 @@ def userEnter(user_id):
 def placeOrder(user_id):
     global customer_cart_list
     global cart_id
+    global total_val 
     if request.method=='POST':
+        OfferDetails = request.form
+        P_code = OfferDetails['Promo_Code']
+        cur = my_sql.connection.cursor()
+        if(P_code=='Coupon_Code'):
+            cur.execute("UPDATE cart SET Offer_ID = %s WHERE Cart_ID = %s",(None,cart_id))
+            my_sql.connection.commit()
+            cur.close()
+        else:
+            offer_list = cur.execute("SELECT * FROM offer")
+            if offer_list>0:
+                offer_all = cur.fetchall()
+                deduct = 0
+                my_tup=()
+            for tup in offer_all:
+                if(tup[1]==P_code):
+                    my_tup=tup
+                    if(int(total_val)>int(tup[3])):
+                        dval = (int(total_val)*float(tup[2]))/100
+                        if(float(dval)>int(tup[4])):
+                            deduct=int(tup[4])
+                        else:
+                            deduct=dval
+                    break
+            if(deduct==0):
+                cur.execute("UPDATE cart SET Offer_ID = %s WHERE Cart_ID = %s",(None,cart_id))
+                my_sql.connection.commit()
+                cur.close()
+            else:
+                cur.execute("UPDATE cart SET Offer_ID = %s WHERE Cart_ID = %s",(my_tup[0],cart_id))
+                cur.execute("UPDATE cart SET Final_Amount = %s WHERE Cart_ID = %s",(total_val-deduct,cart_id))
+                my_sql.connection.commit()
+                cur.close()
         for item in customer_cart_list:
             product_name = item['Name']
             cur = my_sql.connection.cursor()
@@ -93,10 +126,7 @@ def placeOrder(user_id):
             my_sql.connection.commit()
             cur.close()
         return redirect('/placeOrder'+'/'+str(user_id))
-    else:
-        url_direct = '/home'+'/'+str(user_id)
-        redirect(url_direct)
-    return render_template('order.html',list=customer_cart_list,user_id=user_id)
+    return render_template('order.html',list=customer_cart_list)
 
 @app.route('/')
 def temp():
