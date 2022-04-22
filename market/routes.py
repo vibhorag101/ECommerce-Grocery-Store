@@ -1,5 +1,4 @@
 from http.client import HTTPResponse
-from socket import RDS_RDMA_DONTWAIT
 from xml.dom.expatbuilder import FragmentBuilder
 from flask import flash, redirect, render_template, request
 from pyparsing import nums
@@ -53,13 +52,18 @@ def home(user_id):
     global total_val
     global customer_cart_list
     cur = my_sql.connection.cursor()
+    print("we arrived before post")
     if request.method=='POST':
+        print("we are at 1")
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO cart(Cart_ID,Total_Value,Total_Count) VALUES(%s, %s, %s)",(cart_id,total_val,total_count))
+        print("we are at 2")
         my_sql.connection.commit()
         cur.close() 
-        url_direct = '/order'+str(user_id)  
-        return redirect(url_direct,list=customer_cart_list)
+        url_direct = '/order'+'/'+str(user_id)
+        print(url_direct)
+        print('Coming here')  
+        return redirect(url_direct)
     else:
         purchaseDetails = request.args
         try:
@@ -78,6 +82,7 @@ def home(user_id):
 
 @app.route('/order/<user_id>',methods=['GET','POST'])
 def placeOrder(user_id):
+    print('came suscessfully here')
     global customer_cart_list
     global cart_id
     if request.method=='POST':
@@ -95,11 +100,11 @@ def placeOrder(user_id):
             cur.execute("INSERT INTO associated_with(Customer_ID,Cart_ID,Product_ID) VALUES(%s, %s, %s)",(user_id,cart_id,id))
             my_sql.connection.commit()
             cur.close()
-        redirect('/placeOrder'+str(user_id))
+        redirect('/placeOrder'+'/'+str(user_id))
     else:
         url_direct = '/home'+'/'+str(user_id)
         redirect(url_direct)
-    return render_template('order.html',customer_cart_list)
+    return render_template('order.html',list=customer_cart_list)
 
 @app.route('/')
 def temp():
