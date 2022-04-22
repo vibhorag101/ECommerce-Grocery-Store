@@ -5,6 +5,7 @@ from pyparsing import nums
 from market import my_sql
 from market import app
 import random
+from datetime import datetime,date
 
 
 ## Change this function as for it to work according to product page add relevent html content...like getting brand,name,price as 
@@ -108,7 +109,8 @@ def placeOrder(user_id):
                 cur.close()
             else:
                 cur.execute("UPDATE cart SET Offer_ID = %s WHERE Cart_ID = %s",(my_tup[0],cart_id))
-                cur.execute("UPDATE cart SET Final_Amount = %s WHERE Cart_ID = %s",(total_val-deduct,cart_id))
+                total_val=total_val-deduct
+                cur.execute("UPDATE cart SET Final_Amount = %s WHERE Cart_ID = %s",(total_val,cart_id))
                 my_sql.connection.commit()
                 cur.close()
         for item in customer_cart_list:
@@ -132,9 +134,28 @@ def placeOrder(user_id):
 def temp():
     return 'HELLO'
 
-@app.route('/placeOrder/<user_id>')
+@app.route('/placeOrder/<user_id>',methods=['GET','POST'])
 def order_placing(user_id):
-    return 'Hello from placing'
+    global total_val
+    if request.method=='POST':
+        orderDetails = request.form
+        HNO = orderDetails['HNO']
+        City = orderDetails['City']
+        State = orderDetails['State']
+        Pincode = orderDetails['Pincode']
+        Mode = orderDetails['Mode']
+        curr_date = date.today()
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        cur = my_sql.connection.cursor()
+        rand_delivery_boy = cur.execute("SELECT Delivery_Boy_ID FROM delivery_boy")
+        if rand_delivery_boy >0:
+            rand_boy = cur.fetchall()
+            boy_key = random.choice(rand_boy)
+        cur.execute("INSERT INTO orders(Mode,Amount,City,State,Order_Time,House_Flat_No,Pincode,Cart_ID,Date,Delivery_Boy_ID) VALUES(%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)",(Mode,total_val,City,State,current_time,HNO,Pincode,cart_id,curr_date,boy_key))
+        my_sql.connection.commit()
+        cur.close()
+    return render_template('orderDetails.html')
 
 @app.route('/customerRegister',methods=['GET','POST'])
 def customerRegister():
