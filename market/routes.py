@@ -43,7 +43,6 @@ def userEnter(user_id):
                 else:
                     temp_dict['Brand']=prod[3]
             my_list.append(temp_dict)
-    reinitialize()
     home(user_id,my_list)
     return render_template('home.html',list=my_list)
 
@@ -77,7 +76,6 @@ def home(user_id,my_list):
             print(cart_id)
         except KeyError:
             tempError = "Error: KeyError"
-    return render_template('home.html',list=my_list)
 
 
 @app.route('/')
@@ -159,6 +157,7 @@ def UserLogin():
                 flash('Invalid Email or Password')
                 # return render_template('IncorrectLogin.html',userDetails=c_tup)
             else:
+                reinitialize()
                 url_direct = '/home'+'/'+str(c_tup[0])
                 return redirect(url_direct)
     return render_template('UserLogin.html')
