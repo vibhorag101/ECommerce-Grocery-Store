@@ -168,7 +168,7 @@ def order_placing(user_id):
         cur.execute("INSERT INTO orders(Mode,Amount,City,State,Order_Time,House_Flat_No,Pincode,Cart_ID,Date,Delivery_Boy_ID) VALUES(%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)",(Mode,total_val,City,State,current_time,HNO,Pincode,cart_id,curr_date,boy_key))
         my_sql.connection.commit()
         cur.close()
-    return render_template('orderDetails.html')
+    return render_template('orderDetails.html',total_val=total_val)
 
 @app.route('/customerRegister',methods=['GET','POST'])
 def customerRegister():
