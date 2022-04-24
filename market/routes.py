@@ -49,7 +49,7 @@ def adminAddOffer(admin_id):
         min_orderval = offerDetails['Min_OrderValue']
         max_discount = offerDetails['Max_Discount']
         cur = my_sql.connection.cursor()
-        cur.execute("INSERT INTO offer(Promo_Code,Percentage_Discount,Min_OrderValue,Max_Discount) VALUES(%s, %s, %s, %s)",(PC,PD,min_orderval,max_discount))
+        cur.execute("INSERT INTO offer(Promo_Code,Percentage_Discount,Min_OrderValue,Max_Discount,admin_id) VALUES(%s, %s, %s, %s,%s)",(PC,PD,min_orderval,max_discount,admin_id))
         flash('You have successfully added a Offer !')
         my_sql.connection.commit()
         cur.close()
