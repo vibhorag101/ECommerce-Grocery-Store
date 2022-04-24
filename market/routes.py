@@ -8,14 +8,40 @@ import random
 from datetime import datetime,date
 
 
-## Change this function as for it to work according to product page add relevent html content...like getting brand,name,price as 
-## get request from form and the POST request will be when user will freeze his order and will go to orders page
-
-
 cart_id=0
 total_val=0
 total_count=0
 customer_cart_list=[]
+
+@app.route('/admin/<admin_id>')
+def adminRedirect(admin_id):
+    return render_template('adminOption.html',admin_id=admin_id)
+
+@app.route('/adminOrder/<admin_id>',methods=['GET', 'POST'])
+def adminViewOrder(admin_id):
+    my_list =[]
+    cur = my_sql.connection.cursor()
+    order_list = cur.execute("SELECT * FROM orders")
+    if order_list>0:
+        order_all = cur.fetchall()
+        for order in order_all:
+            temp_dict = {}
+            for index in range(11):
+                if(index==0):
+                    temp_dict['Order_ID']=order[0]
+                elif(index==1):
+                    temp_dict['Mode']=order[1]
+                elif(index==2):
+                    temp_dict['Amount']=order[2]
+                elif(index==9):
+                    temp_dict['Date']=order[9]
+            my_list.append(temp_dict)
+    if request.method=='POST':
+        return redirect('/admin/'+str(admin_id))
+    return render_template('viewOrder.html',list=my_list)
+
+
+
 
 @app.route('/sell/<seller_id>',methods=['GET', 'POST'])
 def sell(seller_id):
@@ -41,6 +67,8 @@ def sell(seller_id):
                 cur.close()
                 flash('Product added successfully ')
     return render_template('addProduct.html')
+
+
 
 def reinitialize():
     global cart_id
@@ -297,7 +325,7 @@ def AdminLogin():
                 flash('Invalid Email or Password')
                 # return render_template('IncorrectLogin.html',userDetails=c_tup)
             else:
-                url_direct = '/home'+'/'+str(c_tup[0])
+                url_direct = '/admin'+'/'+str(c_tup[0])
                 return redirect(url_direct)
     return render_template('AdminLogin.html')
 
