@@ -1,0 +1,35 @@
+<!-- inherit the template -->
+{% extends 'base.html' %} {% block title %} View the Orders{% endblock
+    %} {% block content %}
+    <div class="container-fuild">
+      <div class="row" style="margin-left: 20px;">
+        <!-- {% set userID = userID %} -->
+        {% for dict in list%}
+        <div class="col-3">
+          <div class="card" style="width: 15rem;margin: 5px;">
+            <img class="card-img-top" src="https://picsum.photos/100" alt="Card image cap"/>
+            <div class="card-body">
+              <h5 class="card-title text-primary">Payment Mode: {{dict.Mode}}</h5>
+              <h5 class="card-title text-success">Order ID: {{dict.Order_ID}}</h5>
+              <h5 class="card-title text-danger">Price: RS {{dict.Amount}}</h5>
+              <h5 class="card-title text-danger">Date {{dict.Date}}</h5>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+      {% endblock %}
+    
+      {% block navBar %}
+      <div style="margin: 5px;">
+        <form class="form-inline my-2 my-lg-0" method="POST">
+            <button class="btn btn-danger my-2 my-sm-0 text-light " type="submit">Go Back</button>
+        </form>
+      </div>
+      <!-- <a class="btn btn-outline-success my-2 my-sm-0 text-light bg-dark" href="/home/{{user_id}}">Go Back</a> -->
+
+      {% endblock %}
+      
+    </div>
+    
