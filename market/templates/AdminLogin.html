@@ -1,125 +1,43 @@
 {% extends 'base.html' %}
 {% block title %}
-  Admin Login
+  Customer Login
 {% endblock %}
 
 {% block content %}
+<div class ="d-flex justify-content-center align-items-center min-vh-100" >
+<div style="max-width: 30%;">
 <form method ="POST" action="">
-<style>
-.search ::placeholder
-{
-  font-family: Roboto,Arial;
-  font-size: 16px;
-}
-.button
-{
-    background-color: rgb(239, 226, 226);
-    color: rgb(2, 8, 14);
-    border-style: solid;
-    border-color: rgb(222, 212, 212);
-    border-width: 1px;
-    height: 30px;
-    width: 150px;
-    cursor: pointer;
-    transition: background-color 0.15s, color 0.15s;
-    border-radius: 15px;
-}
-.button:hover{
-  background-color: rgb(41,118,211);
-  color: white;
-}
-.button:active{
-  opacity: 0.7;
-}
-</style>
-<div style="
-  display: flex;
-  flex-direction: row;
-  margin-top: 50px;
-  justify-content: center;
-  margin-bottom: 100px;
-  ">
-      
-    <div style="flex: 1">
+  <h1 class="text-center">
+    Admin Enter your Authentication Details
+  </h1>
+    
+    <div class="form-group" style="padding-top: 10px;">
+      <input class="form-control" id="exampleInputEmail1" placeholder="First Name"
+      name = "First_Name">
     </div>
-    <div style= "flex: 1;">
-      <p style="text-align: center; font-size: 40px;">Welcome To Admin Login</p>
-    </div>
-    <div style="flex: 1">
-    </div>
-  
-</div>
-<div style="
-  display: flex;
-  flex-direction: row;
-  margin-top: 50px;
-  justify-content: center;
-  ">
-      
-    <div style="flex: 1; margin-left: 100px; margin-right: 100px; vertical-align: top;  align-items: center;">
-      <p style="text-align: center; font-size: 25px;"> First Name </p>
-    </div>
-    <div style= "flex: 1; vertical-align: top;  margin-right: 100px; vertical-align: top;  align-items: center; margin-top: 6px;">
-      <input class="search" type="text" placeholder="your first name" name= "First_Name">
-    </div>
-    <div style="flex: 2">
 
-    </div>
-  
-</div>
-<div style="
-  display: flex;
-  flex-direction: row;
-  margin-top: 25px;
-  justify-content: center;
-  ">
-      
-    <div style="flex: 1; margin-left: 100px; margin-right: 100px; vertical-align: top;  align-items: center;">
-      <p style="text-align: center; font-size: 25px;"> Last Name </p>
-    </div>
-    <div style= "flex: 1; vertical-align: top;  margin-right: 100px; vertical-align: top;  align-items: center; margin-top: 6px;">
-      <input class="search" type="text" placeholder="your last name" name= "Last_Name">
-    </div>
-    <div style="flex: 2">
+    <div class="form-group" style="padding-top: 10px;">
+        <input class="form-control" id="exampleInputEmail1" placeholder="Last Name"
+        name = "Last_Name">
+      </div>
 
-    </div>
-  
-</div>
-<div style="
-  display: flex;
-  flex-direction: row;
-  margin-top: 25px;
-  justify-content: center;
-  margin-bottom: 50px;
-  ">
-      
-    <div style="flex: 1; margin-left: 90px; margin-right: 110px; vertical-align: top;  align-items: center;">
-      <p style="text-align: center; font-size: 25px;"> Password </p>
-    </div>
-    <div style= "flex: 1; vertical-align: top;  margin-right: 100px; vertical-align: top;  align-items: center; margin-top: 6px; ">
-      <input class="search" type="password" placeholder="valid password" name="Password">
-    </div>
-    <div style="flex: 2">
 
+    <div class="form-group" >
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="Password">
+      <small id="passwordHelpBlock" class="form-text text-muted">
+        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+      </small>
     </div>
-  
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  </form>
 </div>
-<div style="
-  display: flex;
-  flex-direction: row;
-  margin-top: 25px;
-  justify-content: center;
-  margin-bottom: 50px;
-  ">
-      
-    <div style="flex: 1; margin-left: 90px; margin-right: 150px; vertical-align: top;  align-items: center;">
-    </div>
-    <div style= "flex: 1; vertical-align: top;  margin-right: 100px; vertical-align: top;  align-items: center; margin-top: 6px; ">
-      <input class="button" type="submit" value = "Login">
-      </form>
-    </div>
-    <div style="flex: 2">
-    </div>
-  
 </div>
+
+
+
+
+
+
 {% endblock %}
