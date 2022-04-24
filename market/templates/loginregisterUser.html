@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}
+  User Choice
+{% endblock %}
+
+{% block content %}
+<form method ="POST" action="">
+<style>
+.search ::placeholder
+{
+  font-family: Roboto,Arial;
+  font-size: 16px;
+}
+.button
+{
+    background-color: rgb(239, 226, 226);
+    color: rgb(2, 8, 14);
+    border-style: solid;
+    border-color: rgb(222, 212, 212);
+    border-width: 1px;
+    height: 60px;
+    width: 200px;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    border-radius: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.button:hover{
+  background-color: rgb(11, 99, 206);
+  color: white;
+}
+.button:active{
+  opacity: 0.7;
+}
+.image_cart
+{
+  height: 250px;
+  width: 450px;
+  border-radius: 75px;
+  border: none;
+}
+</style>
+<div style="
+  display: flex;
+  flex-direction: row;
+  margin-top: 25px;
+  justify-content: center;
+  ">
+      
+    <div style="flex: 1">
+    </div>
+    <div style= "flex: 1;  margin-right: 40px">
+      <img src="{{url_for('static', filename='store.jpg')}}" class="image_cart"/>
+    </div>
+    <div style="flex: 1">
+    </div>
+  
+</div>
+<div>
+<div style="
+margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 30px;
+  ">
+      
+    <div style= "flex: 1; vertical-align: top;  margin-right: 100px; vertical-align: top;  align-items: center; margin-left: 325px;">
+     <p style="font-size: 22px">PLEASE REGISTER OR LOGIN AS GIVEN BELOW</p>
+    </div>
+  
+</div>
+<div style="
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 30px;
+  ">
+      
+    <div style="flex: 1; margin-left: 175px; margin-right: 100px; vertical-align: top;  align-items: center;">
+    </div>
+    <div style= "flex: 1; vertical-align: top;  margin-right: 100px; vertical-align: top;  align-items: center; margin-top: 6px;">
+      <a class="button" href="{{url_for('UserLogin')}}">Login</a>
+    </div>
+    <div style="flex: 2">
+
+    </div>
+  
+</div>
+<div style="
+  display: flex;
+  flex-direction: row;
+  margin-top: 25px;
+  justify-content: center;
+  margin-bottom: 30px;
+  ">
+      
+    <div style="flex: 1; margin-left: 170px; margin-right: 110px; vertical-align: top;  align-items: center;">
+    </div>
+    <div style= "flex: 1; vertical-align: top;  margin-right: 100px; vertical-align: top;  align-items: center; margin-top: 6px; ">
+      <a class="button" href="{{url_for('customerRegister')}}">Register</a>
+    </div>
+    <div style="flex: 2">
+
+    </div>
+  
+</div>
+</div>
+{% endblock %}

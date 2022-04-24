@@ -130,9 +130,22 @@ def placeOrder(user_id):
         return redirect('/placeOrder'+'/'+str(user_id))
     return render_template('order.html',list=customer_cart_list)
 
+@app.route('/HomePage')
 @app.route('/')
-def temp():
-    return 'HELLO'
+def homePage():
+    return render_template('homepage.html')
+
+@app.route('/loginRegisterSeller')
+def loginRegisterSeller():
+    return render_template('loginregisterSeller.html')
+
+@app.route('/loginRegisterUser')
+def loginRegisterUser():
+    return render_template('loginregisterUser.html')
+
+@app.route('/loginRegisterAdmin')
+def loginRegisterAdmin():
+    return render_template('loginregisterAdmin.html')
 
 @app.route('/placeOrder/<user_id>',methods=['GET','POST'])
 def order_placing(user_id):
