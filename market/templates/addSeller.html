@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-  Register Delivery Person
+  Register Seller
 {% endblock %}
 
 {% block content %}
@@ -8,7 +8,7 @@
 <div style="max-width: 30%;">
 <form method ="POST" action="">
   <h1 class="text-center">
-    Enter Delivery Boy Details
+    Enter Seller Details
   </h1>
     <div class="form-row">
         <div class="col">
@@ -31,9 +31,14 @@
       </small>
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Mobile Number" name="Mobile_No">
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Mobile Number" name="Phone_Number">
       <small id="emailHelp" class="form-text text-muted">Must be a 10 Digit Number</small>
     </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Place of Operation" name="Place_Of_Operation">
+      </div>
+
   <div class="text-center">
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
