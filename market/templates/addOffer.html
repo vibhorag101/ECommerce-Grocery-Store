@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+  Seller Panel
+{% endblock %}
+
+{% block content %}
+<div class ="d-flex justify-content-center align-items-center min-vh-100" >
+<div style="max-width: 30%;">
+<form method ="POST" action="">
+  <h1 class="text-center">
+    Enter Offer Details
+  </h1>
+    
+    <div class="form-group" style="padding-top: 10px;">
+      <input class="form-control" id="exampleInputEmail1" placeholder="Promo Code" name = "Prome_Code">
+    </div>
+    <div class="form-group" >
+      <input class="form-control" id="exampleInputPassword1" placeholder="Percentage Discount" name="Percentage_Discount">
+    </div>
+    <div class="form-group" >
+        <input class="form-control" id="exampleInputPassword1" placeholder="Min Order Value" name="Min_OrderValue">
+      </div>
+
+      <div class="form-group" >
+        <input class="form-control" id="exampleInputPassword1" placeholder="Min Order Value" name="Max_Discount">
+      </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  </form>
+</div>
+</div>
+{% endblock %}
+
+<div style="margin: 5px;">
+    <form class="form-inline my-2 my-lg-0" method="GET">
+        <button class="btn btn-danger my-2 my-sm-0 text-light " type="submit">Go Back</button>
+    </form>
+  </div>
+  <!-- <a class="btn btn-outline-success my-2 my-sm-0 text-light bg-dark" href="/home/{{user_id}}">Go Back</a> -->
+
+  {% endblock %}
