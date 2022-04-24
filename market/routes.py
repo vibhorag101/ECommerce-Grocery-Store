@@ -40,7 +40,19 @@ def adminViewOrder(admin_id):
         return redirect('/admin/'+str(admin_id))
     return render_template('viewOrder.html',list=my_list)
 
-
+@app.route('/adminOffer/<admin_id>',methods=['GET', 'POST'])
+def adminAddOffer(admin_id):
+    if request.method=='POST':
+        offerDetails = request.form
+        PC = offerDetails['Promo_Code']
+        PD = offerDetails['Percentage_Discount']
+        min_orderval = offerDetails['Min_OrderValue']
+        max_discount = offerDetails['Max_Discount']
+        cur = my_sql.connection.cursor()
+        cur.execute("INSERT INTO offer(Promo_Code,Percentage_Discount,Min_OrderValue,Max_Discount) VALUES(%s, %s, %s, %s)",(PC,PD,min_orderval,max_discount))
+        my_sql.connection.commit()
+        cur.close()
+    return render_template('addOffer.html',admin_id=admin_id)
 
 
 @app.route('/sell/<seller_id>',methods=['GET', 'POST'])
@@ -270,13 +282,6 @@ def sellerRegister():
         my_sql.connection.commit()
         cur.close()
     return render_template('sellerRegister.html')
-
-# @app.route('/user-purchase',methods=['GET','POST'])
-# def userPurchase():
-#     u_list = []
-#     temp_dict = {}
-#     if request.method=='POST':
-#         prod_details = request.form
         
 @app.route('/UserLogin',methods=['GET','POST'])
 def UserLogin():
@@ -295,16 +300,12 @@ def UserLogin():
                     break
             if c_tup==() or Password!=c_tup[5]:
                 flash('Invalid Email or Password')
-                # return render_template('IncorrectLogin.html',userDetails=c_tup)
             else:
                 reinitialize()
                 url_direct = '/home'+'/'+str(c_tup[0])
                 return redirect(url_direct)
     return render_template('UserLogin.html')
 
-## Edited from here on... Please make the relevent changes in front end
-
-## For this function I made admin enter only f_name, l_name and password and not email as we don't have that in our database
 @app.route('/AdminLogin',methods=['GET','POST'])
 def AdminLogin():
     if request.method=='POST':
@@ -323,13 +324,11 @@ def AdminLogin():
                     break
             if c_tup==() or Password!=c_tup[3]:
                 flash('Invalid Email or Password')
-                # return render_template('IncorrectLogin.html',userDetails=c_tup)
             else:
                 url_direct = '/admin'+'/'+str(c_tup[0])
                 return redirect(url_direct)
     return render_template('AdminLogin.html')
 
-## This is exactly similar as User login
 @app.route('/SellerLogin',methods=['GET','POST'])
 def SellerLogin():
     if request.method=='POST':
@@ -347,7 +346,6 @@ def SellerLogin():
                     break
             if c_tup==() or Password!=c_tup[5]:
                 flash('Invalid Email or Password')
-                # return render_template('IncorrectLogin.html',userDetails=c_tup)
             else:
                 url_direct = '/sell'+'/'+str(c_tup[0])
                 return redirect(url_direct)
