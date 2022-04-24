@@ -17,6 +17,31 @@ total_val=0
 total_count=0
 customer_cart_list=[]
 
+@app.route('/sell/<seller_id>',methods=['GET', 'POST'])
+def sell(seller_id):
+    if request.method=='POST':
+        ProdDetail = request.form
+        Name = ProdDetail['Name']
+        Brand = ProdDetail['Brand']
+        Quantity = ProdDetail['Quantity']
+        cur = my_sql.connection.cursor()
+        prod_list = cur.execute("SELECT * FROM product")
+        if prod_list>0:
+            prod_all = cur.fetchall()
+            c_tup = ()
+            for tup in prod_all:
+                if(tup[1]==Name and tup[3]==Brand):
+                    c_tup = tup
+                    break
+            if c_tup==() or int(Quantity)<0:
+                flash('Invalid Product details or Quantity')
+            else:
+                cur.execute("INSERT INTO sells(Seller_ID,Product_ID,No_of_Product_Sold) VALUES(%s, %s, %s)",(seller_id,tup[0],Quantity))
+                my_sql.connection.commit()
+                cur.close()
+                flash('Product added successfully ')
+    return render_template('addProduct.html')
+
 def reinitialize():
     global cart_id
     global total_count
@@ -296,7 +321,7 @@ def SellerLogin():
                 flash('Invalid Email or Password')
                 # return render_template('IncorrectLogin.html',userDetails=c_tup)
             else:
-                url_direct = '/home'+'/'+str(c_tup[0])
+                url_direct = '/sell'+'/'+str(c_tup[0])
                 return redirect(url_direct)
     return render_template('SellerLogin.html')
 
