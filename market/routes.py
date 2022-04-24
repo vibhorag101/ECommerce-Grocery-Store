@@ -50,6 +50,7 @@ def adminAddOffer(admin_id):
         max_discount = offerDetails['Max_Discount']
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO offer(Promo_Code,Percentage_Discount,Min_OrderValue,Max_Discount) VALUES(%s, %s, %s, %s)",(PC,PD,min_orderval,max_discount))
+        flash('You have successfully added a Offer !')
         my_sql.connection.commit()
         cur.close()
     return render_template('addOffer.html',admin_id=admin_id)
@@ -65,6 +66,7 @@ def adminAdd_Delivery_Boy(admin_id):
         Password = delivery_boy_Details['Password']
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO delivery_boy(First_Name,Last_Name,Mobile_No,Email,Password,Average_Rating,Admin_ID) VALUES(%s, %s, %s, %s, %s,%s,%s)",(First_Name,Last_Name,Mobile_No,Email,Password,None,admin_id))
+        flash('You have successfully added a delivery boy !')
         my_sql.connection.commit()
         cur.close()
     return render_template('addDelivery.html',admin_id=admin_id)
@@ -81,6 +83,7 @@ def adminAdd_Seller(admin_id):
         Place_Of_Operation = Seller_Details['Place_Of_Operation']
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO seller(First_Name,Last_Name,Email,Phone_Number,Password,Place_Of_Operation,Admin_ID) VALUES(%s, %s, %s, %s, %s,%s,%s)",(First_Name,Last_Name,Email,Phone_Number,Password,Place_Of_Operation,admin_id))
+        flash('You have successfully added a seller !')
         my_sql.connection.commit()
         cur.close()
     return render_template('addSeller.html',admin_id=admin_id)
@@ -97,6 +100,7 @@ def adminAdd_Product(admin_id):
         Unit = Product_Details['Unit']
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO product(Name,Price,Brand,Measurement,Admin_ID,Category_ID,Unit) VALUES(%s, %s, %s, %s, %s,%s,%s)",(Name,Price,Brand,Measurement,admin_id,Category_ID,Unit))
+        flash('You have successfully added a Product !')
         my_sql.connection.commit()
         cur.close()
     return render_template('addNewProducts.html',admin_id=admin_id)
@@ -181,6 +185,7 @@ def userEnter(user_id):
             temp_dict['Brand']=Brand 
             temp_dict['Price']=Price
             customer_cart_list.append(temp_dict)
+            flash('Product has been added successfully to the cart !')
         except KeyError:
             tempError = "Error: KeyError"
     return render_template('home.html',list=my_list)
@@ -277,6 +282,7 @@ def order_placing(user_id):
             rand_boy = cur.fetchall()
             boy_key = random.choice(rand_boy)
         cur.execute("INSERT INTO orders(Mode,Amount,City,State,Order_Time,House_Flat_No,Pincode,Cart_ID,Date,Delivery_Boy_ID) VALUES(%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)",(Mode,total_val,City,State,current_time,HNO,Pincode,cart_id,curr_date,boy_key))
+        flash('Your Order has been placed Successfully !')
         my_sql.connection.commit()
         cur.close()
     return render_template('orderDetails.html',total_val=total_val)
@@ -292,6 +298,7 @@ def customerRegister():
         Password = custDetails['Password']
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO customer(First_Name,Last_Name,Email,Mobile_No,Password) VALUES(%s, %s, %s, %s, %s)",(First_Name,Last_Name,Email,Mobile_No,Password))
+        flash('You have registered successfully !')
         my_sql.connection.commit()
         cur.close()
     return render_template('customerRegister.html')
@@ -305,6 +312,7 @@ def adminRegister():
         Password = custDetails['Password']
         cur = my_sql.connection.cursor()
         cur.execute("INSERT INTO admin(First_Name,Last_Name,Admin_Password) VALUES(%s, %s, %s)",(First_Name,Last_Name,Password))
+        flash('You have registered successfully !')
         my_sql.connection.commit()
         cur.close()
     return render_template('adminRegister.html')
@@ -325,6 +333,7 @@ def sellerRegister():
             rand_ad = cur.fetchall()
             F_key = random.choice(rand_ad)
             cur.execute("INSERT INTO seller(First_Name,Last_Name,Email,Phone_Number,Password,Place_Of_Operation,Admin_ID) VALUES(%s, %s, %s,%s,%s,%s, %s)",(First_Name,Last_Name,Email,Mobile_No,Password,POO, F_key))
+            flash('You have registered successfully !')
         my_sql.connection.commit()
         cur.close()
     return render_template('sellerRegister.html')
