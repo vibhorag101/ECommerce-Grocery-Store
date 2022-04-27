@@ -114,6 +114,8 @@ CREATE TABLE `cart` (
   `Final_Amount` int NOT NULL,
   PRIMARY KEY (`Cart_ID`),
   KEY `cart_offer_Offer_ID_fk` (`Offer_ID`),
+  KEY `totalcount` (`Total_Count`),
+  KEY `finalvalue` (`Final_Amount`),
   CONSTRAINT `cart_offer_Offer_ID_fk` FOREIGN KEY (`Offer_ID`) REFERENCES `offer` (`Offer_ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -166,7 +168,8 @@ CREATE TABLE `customer` (
   `Email` varchar(35) NOT NULL,
   `Mobile_No` varchar(14) NOT NULL,
   `Password` varchar(20) NOT NULL,
-  PRIMARY KEY (`Customer_ID`)
+  PRIMARY KEY (`Customer_ID`),
+  KEY `customerpassword` (`Password`)
 ) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -198,6 +201,7 @@ CREATE TABLE `delivery_boy` (
   `Admin_ID` int NOT NULL,
   PRIMARY KEY (`Delivery_Boy_ID`),
   KEY `delivery_boy_admin_Admin_ID_fk` (`Admin_ID`),
+  KEY `deliveryboyavgrating` (`Average_Rating`),
   CONSTRAINT `delivery_boy_admin_Admin_ID_fk` FOREIGN KEY (`Admin_ID`) REFERENCES `admin` (`Admin_ID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -264,6 +268,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`Order_ID`),
   KEY `orders_cart_Cart_ID_fk` (`Cart_ID`),
   KEY `orders_delivery_boy_Delivery_Boy_ID_fk` (`Delivery_Boy_ID`),
+  KEY `ordermode` (`Mode`),
   CONSTRAINT `orders_cart_Cart_ID_fk` FOREIGN KEY (`Cart_ID`) REFERENCES `cart` (`Cart_ID`) ON DELETE CASCADE,
   CONSTRAINT `orders_delivery_boy_Delivery_Boy_ID_fk` FOREIGN KEY (`Delivery_Boy_ID`) REFERENCES `delivery_boy` (`Delivery_Boy_ID`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -298,6 +303,7 @@ CREATE TABLE `product` (
   PRIMARY KEY (`Product_ID`),
   KEY `product_admin_Admin_ID_fk` (`Admin_ID`),
   KEY `product_category_Category ID_fk` (`Category_ID`),
+  KEY `priceindex` (`Price`),
   CONSTRAINT `product_admin_Admin_ID_fk` FOREIGN KEY (`Admin_ID`) REFERENCES `admin` (`Admin_ID`) ON DELETE SET NULL,
   CONSTRAINT `product_category_Category ID_fk` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -330,6 +336,7 @@ CREATE TABLE `product_feedback` (
   PRIMARY KEY (`Review_ID`,`Product_ID`),
   KEY `product_feedback_customer_Customer_ID_fk` (`Customer_ID`),
   KEY `product_feedback_product_Product_ID_fk` (`Product_ID`),
+  KEY `productreview` (`Rating`,`Product_ID`),
   CONSTRAINT `product_feedback_customer_Customer_ID_fk` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`) ON DELETE SET NULL,
   CONSTRAINT `product_feedback_product_Product_ID_fk` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -360,6 +367,7 @@ CREATE TABLE `rates_order_delivery` (
   PRIMARY KEY (`Order_ID`),
   KEY `rates_order_delivery_customer_Customer_ID_fk` (`Customer_ID`),
   KEY `rates_order_delivery_delivery_boy_Delivery_Boy_ID_fk` (`Delivery_Boy_ID`),
+  KEY `customerratingdeliveryboy` (`Customer_ID`,`Rating_Given`),
   CONSTRAINT `rates_order_delivery_customer_Customer_ID_fk` FOREIGN KEY (`Customer_ID`) REFERENCES `customer` (`Customer_ID`) ON UPDATE CASCADE,
   CONSTRAINT `rates_order_delivery_delivery_boy_Delivery_Boy_ID_fk` FOREIGN KEY (`Delivery_Boy_ID`) REFERENCES `delivery_boy` (`Delivery_Boy_ID`) ON UPDATE CASCADE,
   CONSTRAINT `rates_order_delivery_orders_Order_ID_fk` FOREIGN KEY (`Order_ID`) REFERENCES `orders` (`Order_ID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -375,6 +383,19 @@ LOCK TABLES `rates_order_delivery` WRITE;
 INSERT INTO `rates_order_delivery` VALUES (1,1,201,3),(2,1,203,5),(3,3,205,5),(4,4,207,2),(5,4,209,4),(6,6,211,5),(7,7,213,3),(8,8,215,4),(9,6,217,5),(10,8,219,4);
 /*!40000 ALTER TABLE `rates_order_delivery` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `rating_table`
+--
+
+DROP TABLE IF EXISTS `rating_table`;
+/*!50001 DROP VIEW IF EXISTS `rating_table`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `rating_table` AS SELECT 
+ 1 AS `Average_Rating`,
+ 1 AS `Product_ID`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `selects`
@@ -462,6 +483,24 @@ LOCK TABLES `sells` WRITE;
 INSERT INTO `sells` VALUES (1,1,2),(1,3,1),(1,6,1),(1,8,2),(1,10,2),(3,11,1),(3,12,1),(1,16,1),(1,18,1),(1,20,1),(3,20,1),(6,21,1),(1,22,1),(1,26,1),(1,27,2),(1,28,2),(1,29,2),(1,30,1),(2,47,1),(2,49,1),(2,55,1),(2,65,1),(5,70,1),(2,73,1),(5,75,1),(2,79,1),(2,85,1),(4,87,1);
 /*!40000 ALTER TABLE `sells` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `rating_table`
+--
+
+/*!50001 DROP VIEW IF EXISTS `rating_table`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `rating_table` AS select avg(`product_feedback`.`Rating`) AS `Average_Rating`,`product_feedback`.`Product_ID` AS `Product_ID` from `product_feedback` group by `product_feedback`.`Product_ID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -472,4 +511,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-25  3:54:25
+-- Dump completed on 2022-04-27 20:08:38

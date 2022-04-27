@@ -1,4 +1,4 @@
-CREATE VIEW Rating_Table AS
+CREATE OR REPLACE VIEW Rating_Table AS
 SELECT AVG(product_feedback.Rating) AS Average_Rating, product_feedback.Product_ID
 FROM product_feedback
 GROUP BY product_feedback.Product_ID;
