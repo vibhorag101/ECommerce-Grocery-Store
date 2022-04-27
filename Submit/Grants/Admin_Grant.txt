@@ -1,0 +1,27 @@
+grant select,insert,update,alter
+on category
+to 'Admin1';
+
+grant select,insert,update,alter
+on delivery_boy
+to 'Admin1';
+
+grant select,insert,update,alter
+on offer
+to 'Admin1';
+
+grant select,insert,update,alter
+on product
+to 'Admin1';
+
+grant select,insert,update,alter
+on seller
+to 'Admin1';
+
+grant select
+on orders
+to 'Admin1';
+
+grant select
+on customer
+to 'Admin1';

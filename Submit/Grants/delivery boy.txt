@@ -1,0 +1,19 @@
+grant select
+on product
+to 'Delivery_boy1','Delivery_boy2';
+
+grant select
+on orders
+to 'Delivery_boy1','Delivery_boy2';
+
+grant select
+on offer
+to 'Delivery_boy1','Delivery_boy2';
+
+grant select
+on product_feedback
+to 'Delivery_boy1','Delivery_boy2';
+
+grant select
+on rates_order_delivery
+to 'Delivery_boy1','Delivery_boy2';

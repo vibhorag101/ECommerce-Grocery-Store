@@ -1,0 +1,19 @@
+grant select,insert,update
+on product
+to 'Seller1','Seller2';
+
+grant select
+on orders
+to 'Seller1','Seller2';
+
+grant select
+on offer
+to 'Seller1','Seller2';
+
+grant select
+on sells
+to 'Seller1','Seller2';
+
+grant select
+on category
+to 'Seller1','Seller2';
