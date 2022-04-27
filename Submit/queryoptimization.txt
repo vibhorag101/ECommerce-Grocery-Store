@@ -1,0 +1,24 @@
+QUERY OPTIMIZATION
+
+While writing all of our queries we have made sure they are optimized for performance and are not redundant and they are not unnecessarily complicating the running times and computation.
+There are some of the standard query optimization techniques we have used while writing our queries
+
+1.Creating Index on all the columns where we are frequently using the where clause, group by and order by  in queries
+
+2.Avoiding select * from in query as it is time consuming and instead searching for only that information which we mainly need
+
+3.Whenever we had any doubt in performance of our query we used explain format=json along with query to compare running time and indexing between two similar queries with different implementation
+
+4.Similar attributes across different tables have used same datatype with similar size for faster performance if we use union and join operations so they utilize undexing properly
+
+5.Avoiding aggregate/functional clause in where because it substantially increases the running time instead wherever required we have used views or pre calculated that data.
+
+6.Replacing all OR in our queries in where by UNION as OR is very slow in performance
+
+7.Keeping all the queries in same case for better cache performance as it is useful in query optimization
+
+8.Ensuring that we don’t use any OUTER JOIN as the default JOIN which means INNER JOIN is faster than OUTER JOIN
+
+9.Wherever possible using views to make the actual query simpler and faster
+
+10.Using NOT EXISTS instead of NOT IN as it is faster in one of our queries

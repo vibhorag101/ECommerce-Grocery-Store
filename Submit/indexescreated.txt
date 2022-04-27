@@ -1,0 +1,25 @@
+Appropriate INDEXES Created
+
+1.CREATE INDEX priceindex on product (price);
+This index has been created as we are frequently looking for price in our queries and summing the price for total sales so indexing will make the query faster
+
+2.CREATE INDEX totalcount on cart(Total_count);
+Again we are using total count in cart multiple times in our complex queries for calculating total amount so we index it for faster running time
+
+3.CREATE INDEX finalvalue on cart(Final_Amount);
+The data from column Final_Amount has been used multiple times for computing coupon code data and finding carts with value greater than some particular amount so it is a good practice to index this column
+
+4.CREATE INDEX customerpassword on customer(Password);
+We have written a query which checks for weak customer password and we have large number of entries in Customer table so it is a good practice to index this column.
+
+5.CREATE INDEX deliveryboyavgrating on delivery_boy(Average_Rating);
+Average_Rating of delivery boy has been used multiple times in various queries so we index it
+
+6.CREATE INDEX ordermode on orders(Mode);
+There can be various orders in the data and accessing them by payment mode would be faster through this indexing
+
+7.CREATE INDEX productreview on product_feedback(Rating,Product_ID);
+Quickly searching rating given to particular product is essential for complex queries which takes average and count over large amount of such data so indexing is beneficial here
+
+8.CREATE INDEX customerratingdeliveryboy on rates_order_delivery(Customer_ID,Rating_Given);
+Here too it makes searching for data faster to know which customer has given what rating to know average rating given by that customer for further use and this is optimized by indexing this two columns together.

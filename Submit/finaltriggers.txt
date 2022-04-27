@@ -1,0 +1,76 @@
+TRIGGERS
+It basically tells about the the action that gets performed once there is a certain change in the database. These actions may be things where the person might have to insert or delete a row and then ask the trigger to do something.
+
+1.
+DELIMITER $$
+CREATE
+	TRIGGER update_average_delivery_rating_after_insert AFTER INSERT
+	ON rates_order_delivery
+	FOR EACH ROW 
+	BEGIN
+		UPDATE delivery_boy
+		SET average_rating = (SELECT AVG(Rating_Given)
+				      FROM rates_order_delivery
+				      WHERE rates_order_delivery.Delivery_Boy_ID=NEW.Delivery_Boy_ID)
+		WHERE Delivery_Boy_ID = NEW.Delivery_Boy_ID;
+	END$$
+DELIMITER ;
+
+Explanation:-  In this trigger  the main job is that when we give the rating to a delivery boy in rates_order_delivery then in the table of the delivery_boy the average rating is once again recalculated and updated. 
+
+2.
+DELIMITER $$
+CREATE
+	TRIGGER remove_customer_corresponding_product_feedback BEFORE DELETE
+	ON customer
+	FOR EACH ROW
+	BEGIN
+		DELETE FROM product_feedback
+		WHERE OLD.Customer_ID=Customer_ID;
+	END$$
+DELIMITER ;
+Explanation:-  In this trigger the main work is that when we remove a particular customer then the customer’s feedback in the product feedback is also removed simultaneously.
+
+
+3.
+DELIMITER $$
+CREATE 
+	TRIGGER change_delivery_boy BEFORE UPDATE
+	ON orders
+	FOR EACH ROW 
+	BEGIN
+		UPDATE rates_order_delivery
+		SET rates_order_delivery.Delivery_Boy_ID = NEW.Delivery_Boy_ID
+		WHERE Order_ID = NEW.Order_ID;
+	END$$
+DELIMITER ;
+DELIMITER $$
+CREATE
+	TRIGGER update_average_delivery_rating_after_update AFTER UPDATE
+	ON rates_order_delivery
+	FOR EACH ROW 
+	BEGIN
+		UPDATE delivery_boy
+		SET average_rating = (SELECT AVG(Rating_Given)
+				      FROM rates_order_delivery
+				      WHERE delivery_boy.Delivery_Boy_ID=rates_order_delivery.Delivery_Boy_ID);
+	END$$
+
+DELIMITER ;
+
+Explanation:-  Here if the user changes the delivery boy for a particular order then the new delivery boy is set for that particular order as well now for the removed delivery boy the average rating will change and recalculated accordingly.
+
+
+4.
+DELIMITER $$
+CREATE 
+	TRIGGER delete_product_from_category BEFORE DELETE
+	ON category
+	FOR EACH ROW
+	BEGIN
+		DELETE from product
+		WHERE OLD.Category_ID=product.Category_ID;
+	END$$
+DELIMITER ;
+
+Explanation:-  If a particular category is removed then all the products from that particular category will be deleted.
