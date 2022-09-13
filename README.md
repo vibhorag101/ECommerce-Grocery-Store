@@ -8,7 +8,7 @@ website and do changes as they want to according to their scope in the project. 
 ranges from selling and buying for users to make changes for Administrators and for
 Sellers for selling their products. It also enables the site to work with all the necessary
 constraints to put up an actual E-commerce site. We have connected the Database to
-our actual website which maintains the recording accordingly. if we do any basic change
+our actual website which maintains the recording accordingly, if we do any basic change
 some change happens in or database.
 
 ## The Team 😀
