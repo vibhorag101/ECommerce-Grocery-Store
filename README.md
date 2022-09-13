@@ -50,7 +50,7 @@ py -m venv online_store
 ```
 pip install -r .\requirements.txt
 ```
-- This completes the setup process to run the website 😀
+- This completes the setup process to run the website. Just run using running the `run.py` file 😀
 
 # Demo of the website
 
