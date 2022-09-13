@@ -11,6 +11,13 @@ constraints to put up an actual E-commerce site. We have connected the Database 
 our actual website which maintains the recording accordingly. if we do any basic change
 some change happens in or database.
 
+## The Team 😀
+All of us are CS undergrads at `IIIT Delhi`
+- Vibhor Agarwal
+- Anshak Goel
+- Pritish Poswal
+- Deeptorshi Mondal
+
 ## Project Report 📙📙
 Here find the most detailed [`Report`](https://drive.google.com/file/d/1gwSO9Enmp2_QrMFgUFrtEVAthKgwKdty/view?usp=sharing) you will ever get. It has even the most minute details of our project.
 The `submit` folder contains the project report, variours `SQL Queries` and `SQL Triggers`.
