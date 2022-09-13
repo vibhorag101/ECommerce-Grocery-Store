@@ -65,4 +65,26 @@ Firstly when we open the website we are shown the login screen.
 ![image](https://user-images.githubusercontent.com/76804249/189931179-d0c77367-7732-4ec8-a270-895897884cb0.png)
 
 ## Shopping Screen
+- Once the user is succesfully logged in we show him the product list
 
+![image](https://user-images.githubusercontent.com/76804249/189931991-7129528d-059b-4705-b36d-c0d7760f40e5.png)
+
+- He has the choice of adding the product to the cart. We give him confirmation once added a product succesfully.
+
+![image](https://user-images.githubusercontent.com/76804249/189932723-824e8773-a96c-46f2-aebc-8fc5bb54e558.png)
+
+- Then he can go to the cart and apply coupon code as well
+
+![image](https://user-images.githubusercontent.com/76804249/189932935-66877493-52aa-4f86-91a0-8761e3af526a.png)
+
+- We are then shown the price inclusive of discount and the payment and address is asked
+
+![image](https://user-images.githubusercontent.com/76804249/189933944-768e09ba-e38e-4cc1-a4f9-de2378fbce53.png)
+
+- We then show the user that order has been placed succesfully
+
+![image](https://user-images.githubusercontent.com/76804249/189934185-e49aeae8-6b72-42b2-b92e-86e273146d43.png)
+
+
+
+-
