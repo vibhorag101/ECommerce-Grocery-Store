@@ -37,3 +37,32 @@ pip install -r .\requirements.txt
 ```
 - This completes the setup process to run the website 😀
 
+## Demo of the website
+
+## Login Screen
+Firstly when we open the website we are shown the login screen.
+- We are presented with three options
+ - Use as Admin
+ - Use as Seller
+ - Use as a Customer
+ 
+ ![image](https://user-images.githubusercontent.com/76804249/189930307-1b589e67-6929-42bd-8f95-26791a563861.png)
+
+- Each role is then given a choice to Register or Login
+
+![image](https://user-images.githubusercontent.com/76804249/189930533-d9417030-12ad-4fdb-b8cb-cbc4b78153d8.png)
+
+- If the user chooses login then we show the authentication form
+
+![image](https://user-images.githubusercontent.com/76804249/189930682-974ad142-c7c0-4bb3-b0b4-297e8048315e.png)
+
+- If the entered password is incorrect then we show the error otherwise we login the user.
+
+![image](https://user-images.githubusercontent.com/76804249/189930896-cb75eb5f-fa21-4806-ab96-5387abed6f79.png)
+
+- If the user is not already register we ask the relevant details from him.
+
+![image](https://user-images.githubusercontent.com/76804249/189931179-d0c77367-7732-4ec8-a270-895897884cb0.png)
+
+## Shopping Screen
+
