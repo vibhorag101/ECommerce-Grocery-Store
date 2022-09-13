@@ -499,4 +499,4 @@ n_ID
 ## Explanation of SQL Queries
 Please find the `SQL Queries` and `Triggers` in Submit folder and their explanation in the `Project Report` mentioned above.
                                                  
-                                                             Made with 💖 by Our Team
+                                                    Made with 💖 by Our Team
