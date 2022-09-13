@@ -11,9 +11,14 @@ constraints to put up an actual E-commerce site. We have connected the Database 
 our actual website which maintains the recording accordingly. if we do any basic change
 some change happens in or database.
 
+## Project Report
+Here find the most detailed [Report](https://drive.google.com/file/d/1gwSO9Enmp2_QrMFgUFrtEVAthKgwKdty/view?usp=sharing) you will ever get. It has even the most minute details of our project
+
 ## Tech-Stack Used
 - `Frontend` - HTML, CSS, BootStrap 5, Jinja Template.
 - `Backend` - Python, Flask, MySQL Database.
+- We have populated our database with real and good amount of data to test to the website properly. Data coherency has been taken utmost care of.
+- Proper entities have been maintained in our [ER Diagram](https://drive.google.com/file/d/1gwWgqiIbi1ccUUxpN0GYY3s55nHbmFaf/view?usp=sharing).
 
 We chose `Flask` as our backend becuase we needed the website to be working as quickly as possible to allign with our
 project timeline. Also we chose `MySQL` as our database becuase we were working with it in our DBMS course in Undergrad.
@@ -85,6 +90,18 @@ Firstly when we open the website we are shown the login screen.
 
 ![image](https://user-images.githubusercontent.com/76804249/189934185-e49aeae8-6b72-42b2-b92e-86e273146d43.png)
 
+- If we login as seller than we can the products to the inventory
+
+![image](https://user-images.githubusercontent.com/76804249/189934713-7e24517d-8ac5-4497-b457-131eb59b256b.png)
+
+- If we login as Website Admin then we can do multiple things as shown
+
+![image](https://user-images.githubusercontent.com/76804249/189935135-bddd315f-13c5-4816-947d-738a44108e5a.png)
+
+- Say for example adding a new offer
+
+![image](https://user-images.githubusercontent.com/76804249/189935575-259c4d78-50a2-4d58-9f5f-adb282dd0a03.png)
 
 
--
+
+
