@@ -1,4 +1,4 @@
-# An E-Commerce Grocery Store website using Flask
+# GroStop- An E-Commerce Grocery Store website using Flask
 We have incorporated the database in the form of an application
 where we have tried to resemble it into an E-commerce website which is in a running
 form where users,sellers, and Administrators can work as they want in a real-life
