@@ -26,7 +26,7 @@ The `submit` folder contains the project report, variours `SQL Queries` and `SQL
 - `Frontend` - HTML, CSS, BootStrap 5, Jinja Template.
 - `Backend` - Python, Flask, MySQL Database.
 - We have populated our database with real and good amount of data to test to the website properly. Data coherency has been taken utmost care of.
-- Proper entities have been maintained in our [ER Diagram](https://drive.google.com/file/d/1gwWgqiIbi1ccUUxpN0GYY3s55nHbmFaf/view?usp=sharing) and Relationship Schema.
+- Proper entities have been maintained in our [ER Diagram](https://drive.google.com/file/d/1gwWgqiIbi1ccUUxpN0GYY3s55nHbmFaf/view?usp=sharing) and 
 [Relational Diagram](https://drive.google.com/file/d/1oxjCmVsO1gFkM2QC8il61GxXf2bP8CS7/view?usp=share_link)
 
 ![image](https://user-images.githubusercontent.com/76804249/189937796-1c29cdbc-a151-4b2a-a95f-8d3744407aa2.png)
